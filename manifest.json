@@ -1,0 +1,36 @@
+{
+    "background": {
+      "page": "background.html"
+    },
+    "manifest_version": 2,
+    "name": "8Tracks Media Keys",
+    "icons":
+   {
+      "128": "img/icon128.png",
+      "16": "img/icon16.png",
+      "48": "img/icon48.png"
+   },
+    "description": "",
+    "version": "1.0",
+    "commands": {
+      "next": {
+         "description": "Next Song",
+         "global": true,
+         "suggested_key": {
+            "default": "MediaNextTrack"
+         }
+      },
+      "pause": {
+         "description": "Play/Pause",
+         "global": true,
+         "suggested_key": {
+            "default": "MediaPlayPause"
+         }
+      }
+   },
+    "permissions": [
+        "tabs",
+        "*://8tracks.com/*"
+    ]
+
+}
