@@ -81,7 +81,8 @@ function observeTab(tab){
 				message: data['title'] + ' by ' + data['artist'],
 				iconUrl: 'img/icon128.png',
 				appIconMaskUrl: 'img/icon16.png',
-				isClickable: true
+				isClickable: true,
+				eventTime: (Date.now() + 5000)
 			};
 			
 			if (data['img'])
