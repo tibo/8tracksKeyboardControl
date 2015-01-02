@@ -75,7 +75,6 @@ function observeTab(tab){
 		var notif_settings_key = 'enable_notifs';
 	
 		chrome.storage.local.get(notif_settings_key, function(items) {
-			console.log('items: ',items);
 			if(items[notif_settings_key] == true)
 			{
 				if (message['message'] && message['message'] == 'new_track')
