@@ -80,6 +80,7 @@ function observeTab(tab){
 				title: '8tracks',
 				message: data['title'] + ' by ' + data['artist'],
 				iconUrl: 'img/icon128.png',
+				appIconMaskUrl: 'img/icon16.png',
 				isClickable: true
 			};
 			
