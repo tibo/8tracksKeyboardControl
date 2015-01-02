@@ -7,9 +7,9 @@ Just tested on a Mac keyboard for now.
 
 ## Features
 
-[x] Play/Pause key mapping
-[x] Next key mapping
-[x] Track change as Chrome notification
+- [x] Play/Pause key mapping
+- [x] Next key mapping
+- [x] Track change as Chrome notification
 
 ## How to install
 
