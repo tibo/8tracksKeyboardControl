@@ -3,7 +3,7 @@
       "page": "background/background.html"
     },
     "manifest_version": 2,
-    "name": "8Tracks Media Keys",
+    "name": "8tracks Media Keys",
     "icons":
    {
       "128": "img/icon128.png",
