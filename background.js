@@ -5,11 +5,6 @@ function set8TracksTab(){
 	chrome.tabs.query({'url':'*://8tracks.com/*'}, function(tabs) {
 		if(tabs.length > 0)
 		{
-			if (eightTracksTab && eightTracksTab.id == tabs[0].id)
-			{
-				return;
-			}
-
 			eightTracksTab = tabs[0];
 			observeTab(eightTracksTab);
 
