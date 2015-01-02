@@ -79,7 +79,8 @@ function observeTab(tab){
 				type: 'basic',
 				title: '8tracks',
 				message: data['title'] + ' by ' + data['artist'],
-				iconUrl: 'img/icon128.png'
+				iconUrl: 'img/icon128.png',
+				isClickable: true
 			};
 			
 			if (data['img'])
@@ -89,6 +90,14 @@ function observeTab(tab){
 			
 			chrome.notifications.create('', notification, function(notificationId) {
 			});
+		}
+	});
+
+	chrome.notifications.onClicked.addListener(function(notificationId) {
+		if (eightTracksTab)
+		{
+			chrome.windows.update(eightTracksTab.windowId, {focused: true});
+			chrome.tabs.update(eightTracksTab.id, {selected: true});
 		}
 	});
 
