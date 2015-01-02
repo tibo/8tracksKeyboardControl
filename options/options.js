@@ -1,16 +1,16 @@
 function notification_status_change(){
 	var val = document.getElementById('enable_notifs').checked;
-	
+
 	chrome.storage.local.set({enable_notifs: val}, function() {
 	});
 }
 
 (function() {
+	
+	var notif_settings_key = 'enable_notifs';
 
-	var key = 'enable_notifs';
-
-	chrome.storage.local.get(key, function(items) {
-		if(items[key] == true)
+	chrome.storage.local.get(notif_settings_key, function(items) {
+		if(items[notif_settings_key] == true)
 		{
 			document.getElementById('enable_notifs').checked = true;
 		}
