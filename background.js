@@ -6,7 +6,7 @@ function set8TracksTab(){
 		if(tabs.length > 0)
 		{
 			eightTracksTab = tabs[0];
-			observeTab(eightTracksTab)
+			observeTab(eightTracksTab);
 
 			if(tabs.length > 1)
 			{
