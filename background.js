@@ -1,6 +1,7 @@
 
 var eightTracksTab = undefined;
 
+
 function set8TracksTab(){
 	chrome.tabs.query({'url':'*://8tracks.com/*'}, function(tabs) {
 		if(tabs.length > 0)
@@ -71,28 +72,35 @@ function observeTab(tab){
 	});
 
 	chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-		if (message['message'] && message['message'] == 'new_track')
-		{
-			var data = message['data'];
-
-			var notification = {
-				type: 'basic',
-				title: '8tracks',
-				message: data['title'] + ' by ' + data['artist'],
-				iconUrl: 'img/icon128.png',
-				appIconMaskUrl: 'img/icon16.png',
-				isClickable: true,
-				eventTime: (Date.now() + 5000)
-			};
-			
-			if (data['img'])
+		var notif_settings_key = 'enable_notifs';
+	
+		chrome.storage.local.get(notif_settings_key, function(items) {
+			if(items[notif_settings_key] == true)
 			{
-				notification['iconUrl'] = data['img'];
+				if (message['message'] && message['message'] == 'new_track')
+				{
+					var data = message['data'];
+
+					var notification = {
+						type: 'basic',
+						title: '8tracks',
+						message: data['title'] + ' by ' + data['artist'],
+						iconUrl: 'img/icon128.png',
+						appIconMaskUrl: 'img/icon16.png',
+						isClickable: true,
+						eventTime: (Date.now() + 5000)
+					};
+					
+					if (data['img'])
+					{
+						notification['iconUrl'] = data['img'];
+					}
+					
+					chrome.notifications.create('', notification, function(notificationId) {
+					});
+				}
 			}
-			
-			chrome.notifications.create('', notification, function(notificationId) {
-			});
-		}
+		});
 	});
 
 	chrome.notifications.onClicked.addListener(function(notificationId) {
@@ -101,6 +109,11 @@ function observeTab(tab){
 			chrome.windows.update(eightTracksTab.windowId, {focused: true});
 			chrome.tabs.update(eightTracksTab.id, {selected: true});
 		}
+	});
+
+	chrome.runtime.onInstalled.addListener(function(details) {
+		chrome.storage.local.set({enable_notifs: true}, function() {
+		});
 	});
 
 	set8TracksTab();

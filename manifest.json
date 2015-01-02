@@ -30,9 +30,10 @@
    },
     "permissions": [
         "tabs",
+        "notifications",
+        "storage",
         "*://8tracks.com/*",
-        "http://8tracks.imgix.net/*",
-        "notifications"
-    ]
-
+        "http://8tracks.imgix.net/*"
+    ],
+    "options_page": "options/options.html"
 }
