@@ -20,7 +20,9 @@ var observer = new WebKitMutationObserver(function(mutations, observer) {
 				title = t;
 				artist = a;
 
-				console.log(title + " by " + artist);
+				var cover_url = document.getElementById('cover_art').src;
+
+				chrome.runtime.sendMessage({message: "new_track", data: {title: title, artist: artist, img: cover_url}});
 			}
 		}
 

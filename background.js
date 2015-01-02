@@ -61,12 +61,34 @@ function observeTab(tab){
 	});
 
 	chrome.tabs.onRemoved.addListener(function(tabId, removeInfo) {
-		if (eightTracksTab != undefined)
+		if (eightTracksTab)
 		{
 			if (eightTracksTab.id == tabId)
 			{
 				set8TracksTab();
 			}
+		}
+	});
+
+	chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+		if (message['message'] && message['message'] == 'new_track')
+		{
+			var data = message['data'];
+
+			var notification = {
+				type: 'basic',
+				title: '8tracks',
+				message: data['title'] + ' by ' + data['artist'],
+				iconUrl: 'img/icon128.png'
+			};
+			
+			if (data['img'])
+			{
+				notification['iconUrl'] = data['img'];
+			}
+			
+			chrome.notifications.create('', notification, function(notificationId) {
+			});
 		}
 	});
 
