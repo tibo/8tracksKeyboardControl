@@ -1,9 +1,15 @@
 8TracksMediaKeys
 ================
 
-Just a simple Chrome extension to map the media keys of my keyboard to the 8tracks web player.
+Just a simple Chrome extension to map the media keys of a keyboard to the 8tracks web player and display track change as Chrome notifications.
 
 Just tested on a Mac keyboard for now.
+
+## Features
+
+[x] Play/Pause key mapping
+[x] Next key mapping
+[x] Track change as Chrome notification
 
 ## How to install
 
