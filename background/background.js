@@ -75,6 +75,7 @@ function observeTab(tab){
 		var notif_settings_key = 'enable_notifs';
 	
 		chrome.storage.local.get(notif_settings_key, function(items) {
+			console.log('items: ',items);
 			if(items[notif_settings_key] == true)
 			{
 				if (message['message'] && message['message'] == 'new_track')
@@ -85,8 +86,8 @@ function observeTab(tab){
 						type: 'basic',
 						title: '8tracks',
 						message: data['title'] + ' by ' + data['artist'],
-						iconUrl: 'img/icon128.png',
-						appIconMaskUrl: 'img/icon16.png',
+						iconUrl: '/img/icon128.png',
+						appIconMaskUrl: '/img/icon16.png',
 						isClickable: true,
 						eventTime: (Date.now() + 5000)
 					};
