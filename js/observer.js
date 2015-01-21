@@ -4,8 +4,6 @@ var title = undefined;
 var artist = undefined;
 
 var observer = new WebKitMutationObserver(function(mutations, observer) {
-	// console.log("mutations: ", mutations, observer);
-
 	var now_playing = document.getElementById('now_playing');
 
 	if (now_playing.hasChildNodes())
@@ -20,7 +18,8 @@ var observer = new WebKitMutationObserver(function(mutations, observer) {
 				title = t;
 				artist = a;
 
-				var cover_url = document.getElementById('cover_art').src;
+				var mix_player_details = document.getElementById('mix_player_details');
+				var cover_url = mix_player_details.getElementsByTagName('img')[0].src;
 
 				chrome.runtime.sendMessage({message: "new_track", data: {title: title, artist: artist, img: cover_url}});
 			}
