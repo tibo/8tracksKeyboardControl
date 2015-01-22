@@ -54,7 +54,7 @@ function observeTab(tab){
 	chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 		if (changeInfo['status'] == 'complete')
 		{
-			if (tab.url.indexOf("8tracks.com") > -1)
+			if (tab.url.indexOf("://8tracks.com") > -1)
 			{
 				set8TracksTab();
 			}
