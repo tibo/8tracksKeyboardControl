@@ -26,5 +26,5 @@ You just need to launch a playlist manually first (to make the player appear).
 
 ## Known issues
 
-* May have some issues with the notifications caused by the the player update at the end of a playlist and/or the switch between two playlist.
+* ~~May have some issues with the notifications caused by the the player update at the end of a playlist and/or the switch between two playlist.~~
 * May loose focus of media key if an other music/player app is launched (observed with iTunes, Spotify, VLC...). At this point this is about the concurency in the managment of the keys by the OS and there is not much we can do from a Chrome extension.
