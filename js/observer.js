@@ -20,6 +20,8 @@ var observer = new WebKitMutationObserver(function(mutations, observer) {
 
 				var mix_player_details = document.getElementById('mix_player_details');
 				var cover_url = mix_player_details.getElementsByTagName('img')[0].src;
+				var index_of_parameters = cover_url.indexOf("&w=");
+				var cover_url = cover_url.substr(0, index_of_parameters);
 
 				chrome.runtime.sendMessage({message: "new_track", data: {title: title, artist: artist, img: cover_url}});
 			}
