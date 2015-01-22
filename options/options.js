@@ -1,13 +1,13 @@
 function notification_status_change(){
 	var val = document.getElementById('enable_notifs').checked;
 
-	chrome.storage.local.set({enable_notifs: val}, function() {
+	chrome.storage.local.set({'com.8tracks.enable_notifs': val}, function() {
 	});
 }
 
 (function() {
 	
-	var notif_settings_key = 'enable_notifs';
+	var notif_settings_key = 'com.8tracks.enable_notifs';
 
 	chrome.storage.local.get(notif_settings_key, function(items) {
 		if(items[notif_settings_key] == true)

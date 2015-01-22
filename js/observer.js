@@ -23,7 +23,7 @@ var observer = new WebKitMutationObserver(function(mutations, observer) {
 				var index_of_parameters = cover_url.indexOf("&w=");
 				var cover_url = cover_url.substr(0, index_of_parameters);
 
-				chrome.runtime.sendMessage({message: "new_track", data: {title: title, artist: artist, img: cover_url}});
+				chrome.runtime.sendMessage({message: "com.8tracks.new_track", data: {title: title, artist: artist, img: cover_url}});
 			}
 		}
 

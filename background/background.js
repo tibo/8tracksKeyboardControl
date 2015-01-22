@@ -72,12 +72,12 @@ function observeTab(tab){
 	});
 
 	chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-		var notif_settings_key = 'enable_notifs';
+		var notif_settings_key = 'com.8tracks.enable_notifs';
 	
 		chrome.storage.local.get(notif_settings_key, function(items) {
 			if(items[notif_settings_key] == true)
 			{
-				if (message['message'] && message['message'] == 'new_track')
+				if (message['message'] && message['message'] == 'com.8tracks.new_track')
 				{
 					var data = message['data'];
 
