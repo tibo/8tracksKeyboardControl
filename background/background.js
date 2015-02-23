@@ -71,29 +71,29 @@ function observeTab(tab){
 		}
 	});
 
-	chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+	chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		var notif_settings_key = 'com.8tracks.enable_notifs';
 	
 		chrome.storage.local.get(notif_settings_key, function(items) {
 			if(items[notif_settings_key] == true)
 			{
-				if (message['message'] && message['message'] == 'com.8tracks.new_track')
+				if (request.message && request.message == 'com.8tracks.new_track')
 				{
-					var data = message['data'];
+					var data = request.data;
 
 					var notification = {
 						type: 'basic',
 						title: '8tracks',
-						message: data['title'] + ' by ' + data['artist'],
+						message: data.title + ' by ' + data.artist,
 						iconUrl: '/img/icon128.png',
 						appIconMaskUrl: '/img/icon16.png',
 						isClickable: true,
 						eventTime: (Date.now() + 5000)
 					};
 					
-					if (data['img'])
+					if (data.img)
 					{
-						notification['iconUrl'] = data['img'];
+						notification.iconUrl = data.img;
 					}
 					
 					chrome.notifications.create('', notification, function(notificationId) {
