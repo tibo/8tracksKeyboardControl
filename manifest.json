@@ -35,5 +35,11 @@
         "*://8tracks.com/*",
         "http://8tracks.imgix.net/*"
     ],
+    "externally_connectable": {
+      "matches": [
+        "*://localhost:*/*", 
+        "*://8tracks.com/*"
+        ]
+    },
     "options_page": "options/options.html"
 }

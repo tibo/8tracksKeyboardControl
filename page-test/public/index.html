@@ -1,0 +1,37 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<div id="extension_check"></div>
+		<script type="text/javascript">
+		function check_extension(extension_id, callback)
+		{
+			chrome.runtime.sendMessage(extension_id, { message : 'ping'}, function(response) {
+	        
+	        if (response && response.message == 'pong') 
+	        {
+	        	if (typeof callback === "function") 
+				{
+					callback(true);
+				}
+	        }
+	         
+			});
+   
+			if (typeof callback === "function") 
+			{
+				callback(false);
+			}
+		}
+
+		(function() {
+			var chrome_extension_id = 'jiodmgnibloelnecjfaeemoahfaekbjl';
+
+			document.getElementById('extension_check').innerHTML = "loading...";
+			check_extension(chrome_extension_id, function(installed){
+				document.getElementById('extension_check').innerHTML = installed ? "Chrome extension detected" : "Chrome extension not available";
+			});
+		}());
+		</script>
+	</body>
+</html>

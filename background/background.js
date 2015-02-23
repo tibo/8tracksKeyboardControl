@@ -109,5 +109,17 @@ function set8TracksTab(){
 		});
 	});
 
+	chrome.runtime.onMessageExternal.addListener(
+    function(request, sender, sendResponse) {
+        if (request) {
+            if (request.message) {
+                if (request.message == "ping") {
+                    sendResponse({message: "pong"});
+                }
+            }
+        }
+        return true;
+    });
+
 	set8TracksTab();
 })();
