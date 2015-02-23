@@ -7,7 +7,6 @@ function set8TracksTab(){
 		if(tabs.length > 0)
 		{
 			eightTracksTab = tabs[0];
-			observeTab(eightTracksTab);
 
 			if(tabs.length > 1)
 			{
@@ -18,12 +17,6 @@ function set8TracksTab(){
 		{
 			eightTracksTab = undefined;
 		}
-	});
-}
-
-function observeTab(tab){
-	chrome.tabs.executeScript(tab.id, {
-        file: 'js/observer.js'
 	});
 }
 
