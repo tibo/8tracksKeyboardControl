@@ -64,38 +64,6 @@ function set8TracksTab(){
 		}
 	});
 
-	chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-		var notif_settings_key = 'com.8tracks.enable_notifs';
-	
-		chrome.storage.local.get(notif_settings_key, function(items) {
-			if(items[notif_settings_key] == true)
-			{
-				if (message['message'] && message['message'] == 'com.8tracks.new_track')
-				{
-					var data = message['data'];
-
-					var notification = {
-						type: 'basic',
-						title: '8tracks',
-						message: data['title'] + ' by ' + data['artist'],
-						iconUrl: '/img/icon128.png',
-						appIconMaskUrl: '/img/icon16.png',
-						isClickable: true,
-						eventTime: (Date.now() + 5000)
-					};
-					
-					if (data['img'])
-					{
-						notification['iconUrl'] = data['img'];
-					}
-					
-					chrome.notifications.create('', notification, function(notificationId) {
-					});
-				}
-			}
-		});
-	});
-
 	chrome.notifications.onClicked.addListener(function(notificationId) {
 		if (eightTracksTab)
 		{
@@ -111,13 +79,41 @@ function set8TracksTab(){
 
 	chrome.runtime.onMessageExternal.addListener(
     function(request, sender, sendResponse) {
-        if (request) {
-            if (request.message) {
-                if (request.message == "ping") {
-                    sendResponse({message: "pong"});
-                }
-            }
+        if (request && request.message == "ping") {
+        	// just to test if the extension is installed
+            sendResponse({message: "pong"});
         }
+
+        if (request.message && request.message == 'com.8tracks.new_track')
+        {
+	        var notif_settings_key = 'com.8tracks.enable_notifs';
+		
+			chrome.storage.local.get(notif_settings_key, function(items) {
+				if(items[notif_settings_key] == true)
+				{
+					var data = request.data;
+
+					var notification = {
+						type: 'basic',
+						title: '8tracks',
+						message: data['title'] + ' by ' + data['artist'],
+						iconUrl: '/img/icon128.png',
+						appIconMaskUrl: '/img/icon16.png',
+						isClickable: true,
+						eventTime: (Date.now() + 5000)
+					};
+					
+					if (data.img)
+					{
+						notification.iconUrl = data.img;
+					}
+					
+					chrome.notifications.create('', notification, function(notificationId) {
+					});
+				}
+			});
+		}
+
         return true;
     });
 

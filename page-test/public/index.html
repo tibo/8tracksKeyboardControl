@@ -3,19 +3,22 @@
 	</head>
 	<body>
 		<div id="extension_check"></div>
+		<div id="actions"><input type="button" value="trigger push" onclick="trigger_push();" /></div>
 		<script type="text/javascript">
+		var chrome_extension_id = 'jiodmgnibloelnecjfaeemoahfaekbjl';
+
 		function check_extension(extension_id, callback)
 		{
 			chrome.runtime.sendMessage(extension_id, { message : 'ping'}, function(response) {
 	        
-	        if (response && response.message == 'pong') 
-	        {
-	        	if (typeof callback === "function") 
-				{
-					callback(true);
-				}
-	        }
-	         
+		        if (response && response.message == 'pong') 
+		        {
+		        	if (typeof callback === "function") 
+					{
+						callback(true);
+					}
+		        }
+		         
 			});
    
 			if (typeof callback === "function") 
@@ -24,9 +27,11 @@
 			}
 		}
 
-		(function() {
-			var chrome_extension_id = 'jiodmgnibloelnecjfaeemoahfaekbjl';
+		function trigger_push(){
+			chrome.runtime.sendMessage(chrome_extension_id, {message: "com.8tracks.new_track", data: {title: 'Test', artist: 'No artist', img: 'http://8tracks.imgix.net/i/008/707/767/11005251_806707102743422_290487038_n-3073.jpg?rect=0,0,640,640&q=65&sharp=15&vib=10&fm=jpg&fit=max"'}});
+		}
 
+		(function() {
 			document.getElementById('extension_check').innerHTML = "loading...";
 			check_extension(chrome_extension_id, function(installed){
 				document.getElementById('extension_check').innerHTML = installed ? "Chrome extension detected" : "Chrome extension not available";
