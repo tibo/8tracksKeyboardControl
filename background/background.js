@@ -38,13 +38,27 @@ function observeTab(tab){
 			else if (command == 'pause')
 			{
 				chrome.tabs.executeScript(eightTracksTab.id, {code : "document.getElementById('player_pause_button').style.display"}, function(results){
-					if (results[0] == 'none')
+					if (results == null)
 					{
-						chrome.tabs.executeScript(eightTracksTab.id, {code : "document.getElementById('player_play_button').click();"});
+						if (results[0] == 'none')
+						{
+							chrome.tabs.executeScript(eightTracksTab.id, {code : "document.getElementById('player_play_button').click();"});
+						}
+						else
+						{
+							chrome.tabs.executeScript(eightTracksTab.id, {code : "document.getElementById('player_pause_button').click();"});
+						}
 					}
 					else
 					{
-						chrome.tabs.executeScript(eightTracksTab.id, {code : "document.getElementById('player_pause_button').click();"});
+						if (eightTracksTab.url == 'http://8tracks.com' || eightTracksTab.url == 'http://8tracks.com/')
+						{
+							chrome.tabs.executeScript(eightTracksTab.id, {code : "document.getElementsByClassName('quick-play-story')[0].click();"});
+						}
+						else
+						{
+							chrome.tabs.executeScript(eightTracksTab.id, {code : "document.getElementById('play_overlay').click();"});
+						}
 					}
 				});
 			}

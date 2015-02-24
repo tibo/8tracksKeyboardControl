@@ -10,7 +10,7 @@ Just tested on a Mac keyboard for now.
 - [x] Play/Pause key mapping
 - [x] Next key mapping
 - [x] Track change as Chrome notification
-- [ ] Play the first suggested playlist or launch the playlist if the player is hidden
+- [x] Play the first suggested playlist or launch the playlist if the player is hidden
 
 ## How to install
 
