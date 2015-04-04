@@ -13,7 +13,10 @@ module.exports = function (grunt) {
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
-        files: ['background/background.js', 'options/options.js'],
+        files: [
+          'background/background.js',
+          'options/options.js'
+        ],
         tasks: ['jshint'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -27,7 +30,9 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          'background/background.js', 'options/options.js',
+          'background/background.js',
+          'options/options.js',
+          'options/options.html',
           'img/{,*/}*.{png,jpg,jpeg,gif}',
           'manifest.json'
         ]
