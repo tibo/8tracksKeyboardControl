@@ -24,6 +24,12 @@ The extension is not available on the Chrome store for now. You need to install 
 At this point it should find itself if you have a tab open on 8tracks and observe for new tabs.
 You just need to launch a playlist manually first (to make the player appear).
 
+## Development setup
+
+Install [Node and NPM](https://nodejs.org/download/) and run `npm install` from the extension folder to install `Grunt`.
+
+Run `grunt` or `grunt debug` for a live watch of the sources with automatic run of `jshint` and a live reload of the Chrome extension itself.
+
 ## Known issues
 
 * ~~May have some issues with the notifications caused by the the player update at the end of a playlist and/or the switch between two playlist.~~

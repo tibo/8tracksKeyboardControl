@@ -3,27 +3,21 @@ var eightTracksTab = undefined;
 
 
 function set8TracksTab(){
-	chrome.tabs.query({'url':'*://8tracks.com/*'}, function(tabs) {
+	chrome.tabs.query({'url':'*://*.8tracks.com/*'}, function(tabs) {
 		if(tabs.length > 0)
 		{
 			eightTracksTab = tabs[0];
-			observeTab(eightTracksTab);
 
 			if(tabs.length > 1)
 			{
 				console.log("You have more than one tab open on 8tracks.");
+				console.log(tabs);
 			}
 		}
 		else
 		{
 			eightTracksTab = undefined;
 		}
-	});
-}
-
-function observeTab(tab){
-	chrome.tabs.executeScript(tab.id, {
-        file: 'js/observer.js'
 	});
 }
 
@@ -51,7 +45,7 @@ function observeTab(tab){
 					}
 					else
 					{
-						if (eightTracksTab.url == 'http://8tracks.com' || eightTracksTab.url == 'http://8tracks.com/')
+						if (eightTracksTab.url == 'http://8tracks.com' || eightTracksTab.url == 'http://localhost.8tracks.com:3000/')
 						{
 							chrome.tabs.executeScript(eightTracksTab.id, {code : "document.getElementsByClassName('quick-play-story')[0].click();"});
 						}
@@ -66,10 +60,11 @@ function observeTab(tab){
 	});
 
 	chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-		if (changeInfo['status'] == 'complete' && !eightTracksTab)
+		if (changeInfo['status'] == 'complete')
 		{
-			if (tab.url.indexOf("://8tracks.com") > -1)
+			if (tab.url.indexOf("://8tracks.com") > -1 || tab.url.indexOf("http://localhost.8tracks.com") > -1)
 			{
+				console.log("found 8tracks tab");
 				set8TracksTab();
 			}
 		}

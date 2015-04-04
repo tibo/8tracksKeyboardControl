@@ -1,6 +1,9 @@
 {
     "background": {
-      "page": "background/background.html"
+      "scripts": [
+        "background/background.js",
+        "background/chromereload.js"
+      ]
     },
     "manifest_version": 2,
     "name": "8tracks Media Keys",
@@ -11,7 +14,7 @@
       "48": "img/icon48.png"
    },
     "description": "",
-    "version": "1.0",
+    "version": "0.1",
     "commands": {
       "next": {
          "description": "Next Song",
@@ -32,8 +35,7 @@
         "tabs",
         "notifications",
         "storage",
-        "*://8tracks.com/*",
-        "http://8tracks.imgix.net/*"
+        "*://*.8tracks.com/*"
     ],
     "options_page": "options/options.html"
 }
