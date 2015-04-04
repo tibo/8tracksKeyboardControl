@@ -1,12 +1,6 @@
 {
-    "background": {
-      "scripts": [
-        "background/background.js",
-        "background/chromereload.js"
-      ]
-    },
-    "manifest_version": 2,
     "name": "8tracks Media Keys",
+    "manifest_version": 2,   
     "icons":
    {
       "128": "img/icon128.png",
@@ -15,6 +9,13 @@
    },
     "description": "",
     "version": "0.1",
+    "background": {
+      "scripts": [
+        "background/background.js",
+        "background/chromereload.js"
+      ]
+    },
+    "options_page": "options/options.html",
     "commands": {
       "next": {
          "description": "Next Song",
@@ -37,5 +38,9 @@
         "storage",
         "*://*.8tracks.com/*"
     ],
-    "options_page": "options/options.html"
+    "externally_connectable": {
+      "matches": [
+        "*://*.8tracks.com/*"
+      ]
+    }
 }
