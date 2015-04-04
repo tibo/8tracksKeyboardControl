@@ -80,13 +80,12 @@ function set8TracksTab(){
 		}
 	});
 
-	chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	chrome.runtime.onMessageExternal.addListener(function(request, sender, sendResponse) {
 		var notif_settings_key = 'com.8tracks.enable_notifs';
 	
-		chrome.storage.local.get(notif_settings_key, function(items) {
-			if(items[notif_settings_key] == true)
-			{
-				if (request.message && request.message == 'com.8tracks.new_track')
+		if (request.message && request.message == 'com.8tracks.new_track') {
+			chrome.storage.local.get(notif_settings_key, function(items) {
+				if(items[notif_settings_key] == true)
 				{
 					var data = request.data;
 
@@ -108,8 +107,8 @@ function set8TracksTab(){
 					chrome.notifications.create('', notification, function(notificationId) {
 					});
 				}
-			}
-		});
+			});
+		}
 	});
 
 	chrome.notifications.onClicked.addListener(function(notificationId) {
