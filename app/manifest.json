@@ -1,0 +1,45 @@
+{
+  "name": "8tracks Media Keys",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "description": "",
+  "version": "0.1",
+  "background": {
+    "scripts": [
+      "background/background.js",
+      "background/chromereload.js"
+    ]
+  },
+  "options_page": "options/options.html",
+  "commands": {
+    "next": {
+      "description": "Next Song",
+      "global": true,
+      "suggested_key": {
+        "default": "MediaNextTrack"
+      }
+    },
+    "pause": {
+      "description": "Play/Pause",
+      "global": true,
+      "suggested_key": {
+        "default": "MediaPlayPause"
+      }
+    }
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "storage",
+    "*://*.8tracks.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.8tracks.com/*"
+    ]
+  }
+}

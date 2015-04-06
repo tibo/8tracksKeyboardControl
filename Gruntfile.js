@@ -14,8 +14,8 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: [
-          'background/background.js',
-          'options/options.js'
+          'app/background/background.js',
+          'app/options/options.js'
         ],
         tasks: ['jshint'],
         options: {
@@ -30,11 +30,11 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          'background/background.js',
-          'options/options.js',
-          'options/options.html',
-          'img/{,*/}*.{png,jpg,jpeg,gif}',
-          'manifest.json'
+          'app/background/background.js',
+          'app/options/options.js',
+          'app/options/options.html',
+          'app/img/{,*/}*.{png,jpg,jpeg,gif}',
+          'app/manifest.json'
         ]
       }
     },
@@ -51,7 +51,7 @@ module.exports = function (grunt) {
         options: {
           open: false,
           base: [
-            '/Users/tibo/Desktop/8tracks/8TracksChrome/'
+            'app/'
           ]
         }
       }
@@ -65,10 +65,75 @@ module.exports = function (grunt) {
       },
       all: [
         'Gruntfile.js',
-        '/background/{,*/}*.js',
-        '/options/{,*/}*.js'
+        'app/background/{,*/}*.js',
+        'app/options/{,*/}*.js'
       ]
     },
+
+    // build
+    clean: {
+      dist: {
+        files: [{
+          dot: true,
+          src: [
+            'dist/*',
+          ]
+        }]
+      }
+    },
+
+    chromeManifest: {
+      dist: {
+        options: {
+          buildnumber: true,
+          indentSize: 2,
+          background: {
+            target: 'background/background.js',
+            exclude: [
+              'background/chromereload.js'
+            ]
+          }
+        },
+        src: 'app/',
+        dest: 'dist/'
+      }
+    },
+
+    copy: {
+      dist: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: 'app/',
+          dest: 'dist/',
+          src: [
+            '*.{ico,png,txt}',
+            'img/{,*/}*.{png,jpg,jpeg,gif}',
+            '{,*/}*.html',
+            'options/options.js',
+            'background/background.js'
+          ]
+        }]
+      }
+    },
+
+    compress: {
+      dist: {
+        options: {
+          archive: function() {
+            var manifest = grunt.file.readJSON('app/manifest.json');
+            return 'package/8tracksMediaKeys-' + manifest.version + '.zip';
+          }
+        },
+        files: [{
+          expand: true,
+          cwd: 'dist/',
+          src: ['**'],
+          dest: ''
+        }]
+      }
+    }
+
   });
 
   grunt.registerTask('debug', function () {
@@ -81,5 +146,12 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'debug'
+  ]);
+
+  grunt.registerTask('build', [
+    'clean:dist',
+    'chromeManifest:dist',
+    'copy',
+    'compress'
   ]);
 };
