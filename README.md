@@ -1,4 +1,4 @@
-8TracksMediaKeys
+8tracksKeyboardControl
 ================
 
 Just a simple Chrome extension to map the media keys of a keyboard to the 8tracks web player and display track change as Chrome notifications.
@@ -16,7 +16,7 @@ Just tested on a Mac keyboard for now.
 
 The extension is not available on the Chrome store for now. You need to install it manually :
 
-* Clone the repository or download the [source archive](https://github.com/tibo/8TracksMediaKeys/archive/master.zip) and unzip it
+* Clone the repository or download the [source archive](https://github.com/tibo/8tracksKeyboardControl/archive/master.zip) and unzip it
 * Go to your Chrome Settings
 * Go the Extensions section, make sure to enable the Developer mode and click on Load unpacked extension
 * And finally select the folder you've just unzipped earlier and you should see the extension at the top of you extension list
