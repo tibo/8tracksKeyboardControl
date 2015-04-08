@@ -1,7 +1,7 @@
 'use strict';
 
 var eightTracksTab;
-
+var notifSettingsKey = 'com.8tracks.enable_notifs';
 
 function set8TracksTab(){
 	chrome.tabs.query({'url':'*://*.8tracks.com/*'}, function(tabs) {
@@ -81,8 +81,6 @@ function set8TracksTab(){
 	});
 
 	chrome.runtime.onMessageExternal.addListener(function(request) {
-		var notifSettingsKey = 'com.8tracks.enable_notifs';
-	
 		if (request.message && request.message === 'com.8tracks.new_track') {
 			chrome.storage.local.get(notifSettingsKey, function(items) {
 				if(items[notifSettingsKey] === true)
@@ -119,7 +117,11 @@ function set8TracksTab(){
 	});
 
 	chrome.runtime.onInstalled.addListener(function() {
-		chrome.storage.local.set({enableNotifs: true});
+
+		var obj = {};
+		obj[notifSettingsKey] = true;
+
+		chrome.storage.local.set(obj);
 	});
 
 	set8TracksTab();

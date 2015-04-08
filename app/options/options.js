@@ -1,15 +1,17 @@
 'use strict';
 
+var notifSettingsKey = 'com.8tracks.enable_notifs';
+
 function notificationStatusChange(){
 	var val = document.getElementById('enable_notifs').checked;
 
-	chrome.storage.local.set({'com.8tracks.enable_notifs': val});
+	var obj = {};
+	obj[notifSettingsKey] = val;
+
+	chrome.storage.local.set(obj);
 }
 
 (function() {
-	
-	var notifSettingsKey = 'com.8tracks.enable_notifs';
-
 	chrome.storage.local.get(notifSettingsKey, function(items) {
 		if(items[notifSettingsKey] === true)
 		{
