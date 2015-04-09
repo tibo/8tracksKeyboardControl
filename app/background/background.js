@@ -33,7 +33,7 @@ function set8TracksTab(){
 			else if (command === 'pause')
 			{
 				chrome.tabs.executeScript(eightTracksTab.id, {code : 'document.getElementById(\'player_pause_button\').style.display'}, function(results){
-					if (results === null)
+					if (results[0] !== null)
 					{
 						if (results[0] === 'none')
 						{
